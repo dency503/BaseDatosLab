@@ -1,12 +1,21 @@
--- Inserciones en la tabla Direcciones
+-- Inserciones en la tabla Direcciones ;
+
+DELETE FROM Empleados WHERE [idEmpleado] >= 6;
+DBCC CHECKIDENT ('Empleados', RESEED, 5);
+
 INSERT INTO Direcciones (Linea1, Linea2, CP, idDistrito, idMunicipio, idDepartamento)
 VALUES
     ('Calle Principal 123', 'Colonia Central', 'CP12345', 1, 1, 1),
     ('Avenida Principal 456', 'Barrio Norte', 'CP67890', 2, 2, 2),
     ('Carretera 789', NULL, 'CP54321', 3, 3, 3),
     ('Avenida Central 101', 'Urbanización Los Pinos', 'CP11111', 4, 4, 4),
-    ('Calle Comercial 222', 'Barrio Centro', 'CP22222', 5, 5, 5);
-
+    ('Calle Comercial 222', 'Barrio Centro', 'CP22222', 5, 5, 5),
+	('Calle 6A', 'Colonia Nueva', 'CP66666', 5, 5, 5),
+    ('Avenida 7B', 'Barrio Oeste', 'CP77777', 4, 4, 4),
+    ('Carretera 8C', NULL, 'CP88888', 3, 3, 3),
+    ('Avenida 9D', 'Urbanización Los Pinos', 'CP99999', 2, 2, 2),
+	('Calle 10A', 'Colonia Este', 'CP10101', 1, 1, 1),
+    ('Avenida 11B', 'Barrio Sur', 'CP11111', 2, 2,2);
 -- Inserciones en la tabla Empleados
 INSERT INTO Empleados (Nombres, Apellidos, DUI, ISSS, IDDireccion, FechaNacimiento, Telefono, Email)
 VALUES
@@ -14,7 +23,14 @@ VALUES
     ('Ana', 'García', '98765432-1', 'ISSS98765432109', 2, '1985-09-20', '7777-8888', 'ana.garcia@email.com'),
     ('Pedro', 'López', '45678901-2', 'ISSS45678901203', 3, '1995-02-10', '3333-9999', 'pedro.lopez@email.com'),
     ('María', 'Rodríguez', '23456789-0', 'ISSS23456789007', 4, '1988-11-30', '6666-7777', 'maria.rodriguez@email.com'),
-    ('Luis', 'Martínez', '34567890-1', 'ISSS34567890105', 5, '1992-07-08', '5555-4444', 'luis.martinez@email.com');
+    ('Luis', 'Martínez', '34567890-1', 'ISSS34567890105', 5, '1992-07-08', '5555-4444', 'luis.martinez@email.com'),
+	('Luis', 'Martínez', '04567890-1', 'ISSS34567890105', 6, '1992-07-08', '5555-4444', 'luis.martinez@email.com'),
+    ('Carlos', 'Hernández', '12345678-0', 'ISSS12345678901', 7, '1987-04-22', '2222-3333', 'carlos.hernandez@email.com'),
+    ('Marta', 'Gómez', '98065432-1', 'ISSS98765432109', 8, '1991-08-15', '7777-9999', 'marta.gomez@email.com'),
+    ('Roberto', 'Díaz', '4078901-2', 'ISSS45678901203', 9, '1983-12-05', '3333-7777', 'roberto.diaz@email.com'),
+	('Laura', 'Fernández', '11111111-1', 'ISSS11111111111', 10, '1994-03-25', '8888-9999', 'laura.fernandez@email.com'),
+    ('David', 'Gutiérrez', '00222222-2', 'ISSS22222222222', 11, '1989-11-15', '7777-6666', 'david.gutierrez@email.com');
+
 
 -- Inserciones en la tabla Proveedores
 INSERT INTO Proveedores (Telefono, idDireccion, Nombre)
