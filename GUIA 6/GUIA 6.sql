@@ -1,43 +1,25 @@
-use Ferreteria
-go
-create procedure AgregarCliente
+-- Procedimiento almacenado para agregar un nuevo cliente
+CREATE PROCEDURE sp_AgregarCliente
+    @Nombres VARCHAR(50),
+    @Apellidos VARCHAR(50),
+    @DUI VARCHAR(10),
+    @Telefono VARCHAR(15)
+AS
+BEGIN
+    INSERT INTO Clientes (Nombres, Apellidos, DUI, Telefono)
+    VALUES (@Nombres, @Apellidos, @DUI, @Telefono);
+END;
+EXEC sp_AgregarCliente 'NombreCliente', 'ApellidoCliente', '123456789', '1234567890';
 
-	@Nombre varchar(50),
-	@Apelldos varchar(50) ,
-	@DUI varchar(10),
-	@Telefono varchar(9)
-as 
-begin 
-insert into Clientes values
-(
-@Nombre,
-	@Apelldos  ,
-	@DUI,
-	@Telefono 
-);
-select * from Clientes;
-end
-
-EXECUTE AgregarCliente
-@Nombre = 'Marina',
-	@Apelldos ='Navidad' ,
-	@DUI = '00292785-0',
-	@Telefono = '7545-2654'
-	
 
 go
-create procedure MostraFechaCompras
-as
-begin
-select CLI.DUI,
-CLI.Nombres,CLI.Apellidos,
-COMP.FechaCompra
-from
-Clientes CLI,
- Compras COMP
-where
-CLI.DUI = COMP.IDCliente
-order by CLI.DUI
-end
 
-exec MostraFechaCompras;
+-- Procedimiento almacenado de consulta con JOIN para obtener ventas con detalles
+CREATE PROCEDURE sp_ObtenerVentasConDetalles
+AS
+BEGIN
+    SELECT V.idVenta, V.FechaCompra, V.MontoCompra, C.Nombres AS NombreCliente, E.Nombres AS NombreEmpleado
+    FROM Ventas V
+    INNER JOIN Clientes C ON V.IDCliente = C.idCliente
+    INNER JOIN Empleados E ON V.IDEmpleado = E.idEmpleado;
+END;
